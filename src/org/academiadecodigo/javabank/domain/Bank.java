@@ -16,7 +16,7 @@ public class Bank {
         double balance = 0;
 
         for (Customer customer : customers) {
-            balance += customer.getBalance();
+          //  balance += customer.getBalance();
         }
 
         return balance;

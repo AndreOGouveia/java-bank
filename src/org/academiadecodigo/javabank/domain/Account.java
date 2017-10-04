@@ -1,14 +1,14 @@
 package org.academiadecodigo.javabank.domain;
 
-public class Account {
+public abstract class Account {
 
-    private AccountType accountType;
+    private int customerNumber;
     private double balance = 0;
     private int id;
 
-    public Account(int id, AccountType accountType) {
+    public Account(int id, int customerNumber) {
+        this.customerNumber = customerNumber;
         this.id = id;
-        this.accountType = accountType;
     }
 
     public void credit(double amount) {
@@ -25,11 +25,15 @@ public class Account {
         return balance;
     }
 
-    public AccountType getAccountType() {
-        return accountType;
+    public String getAccountType() {
+        return this.getClass().getSimpleName();
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getCustomerNumber() {
+        return customerNumber;
     }
 }
