@@ -1,13 +1,12 @@
-package org.academiadecodigo.javabank.domain;
+package org.academiadecodigo.javabank.domain.accounts;
 
 public abstract class Account {
 
-    private int customerNumber;
+
     private double balance = 0;
     private int id;
 
-    public Account(int id, int customerNumber) {
-        this.customerNumber = customerNumber;
+    public Account(int id) {
         this.id = id;
     }
 
@@ -31,9 +30,5 @@ public abstract class Account {
 
     public int getId() {
         return id;
-    }
-
-    public int getCustomerNumber() {
-        return customerNumber;
     }
 }

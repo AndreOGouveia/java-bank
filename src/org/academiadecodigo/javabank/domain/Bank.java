@@ -16,10 +16,19 @@ public class Bank {
         double balance = 0;
 
         for (Customer customer : customers) {
-          //  balance += customer.getBalance();
+            balance += customer.getBalance();
         }
 
         return balance;
+    }
+
+    public Customer getCustomer(int customerNumber){
+        for(Customer customer : customers){
+            if(customer.getCustomerNumber() == customerNumber){
+                return customer;
+            }
+        }
+        return null;
     }
 
 }

@@ -1,13 +1,16 @@
 package org.academiadecodigo.javabank.test;
 
 import org.academiadecodigo.javabank.domain.*;
+import org.academiadecodigo.javabank.domain.accounts.Account;
+import org.academiadecodigo.javabank.domain.accounts.AccountType;
+import org.academiadecodigo.javabank.domain.managers.AccountManager;
 
 public class CustomerTest {
 
     public boolean test() {
 
         AccountManager acman = new AccountManager();
-        Customer customer = new Customer(acman,1);
+        Customer customer = new Customer(acman,1,"André");
 
         // customer should start with zero balance
         if (customer.getBalance() != 0) {
@@ -34,14 +37,14 @@ public class CustomerTest {
         }
 
         // customer must be able to perform transfers between accounts
-        customer.transfer(a2.getId(), a1.getId(), 20);
-        if (a2.getBalance() != 100 || a1.getBalance() != 120) {
+        customer.transfer(a2, a1, 20);
+        if (acman.getBalance(a2) != 100 || acman.getBalance(a1) != 120) {
             return false;
         }
 
         // customer can not withdraw from savings account
-        customer.withdraw(2, 100);
-        if (a2.getBalance() != 100) {
+        customer.withdraw(a2, 100);
+        if (acman.getBalance(a2) != 100) {
             return false;
         }
 

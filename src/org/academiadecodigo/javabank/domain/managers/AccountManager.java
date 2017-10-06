@@ -1,28 +1,28 @@
-package org.academiadecodigo.javabank.domain;
+package org.academiadecodigo.javabank.domain.managers;
+
+import org.academiadecodigo.javabank.domain.accounts.Account;
+import org.academiadecodigo.javabank.domain.accounts.AccountType;
+import org.academiadecodigo.javabank.domain.accounts.CheckingAccount;
+import org.academiadecodigo.javabank.domain.accounts.SavingsAccount;
+import org.academiadecodigo.javabank.domain.factories.AccountFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class AccountManager {
 
+    public static int numberOfAccounts = 0;
     public static final int MIN_SAVINGS_BALANCE = 100;
 
     private Map<Integer, Account> accounts = new HashMap<>();
 
 
-    public int addAccount(AccountType accountType, int customerNumber){
+    public Account openAccount(AccountType accountType){
 
         Account newAccount;
-
-        if(accountType == AccountType.SAVINGS){
-            newAccount = new SavingsAccount(accounts.size()+1,  customerNumber);
-        }
-        else{
-            newAccount = new CheckingAccount(accounts.size()+1,customerNumber);
-        }
-
-        accounts.put(newAccount.getId(), newAccount);
-        return newAccount.getId();
+        AccountFactory accountFactory = new AccountFactory();
+        newAccount  = accountFactory.openAccount(accountType,++numberOfAccounts);
+        return newAccount;
     }
 
 
@@ -78,17 +78,6 @@ public class AccountManager {
 
     }
 
-    public double getCustomerBalance(int customerNumber){
 
-        double balance =0;
-        for (Account acc : accounts.values()){
-
-            if(acc.getCustomerNumber() == customerNumber){
-                balance+=acc.getBalance();
-            }
-        }
-
-        return balance;
-    }
 
 }
