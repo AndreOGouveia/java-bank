@@ -1,12 +1,10 @@
-package org.academiadecodigo.javabank.managers;
+package org.academiadecodigo.javabank.model;
 
-import org.academiadecodigo.javabank.domain.account.Account;
-import org.academiadecodigo.javabank.domain.account.AccountType;
-import org.academiadecodigo.javabank.domain.account.SavingsAccount;
-import org.academiadecodigo.javabank.factories.AccountFactory;
+import org.academiadecodigo.javabank.model.account.Account;
+import org.academiadecodigo.javabank.model.account.AccountType;
+import org.academiadecodigo.javabank.utils.factories.AccountFactory;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class AccountManager {
 
@@ -47,5 +45,9 @@ public class AccountManager {
             srcAccount.debit(amount);
             dstAccount.credit(amount);
         }
+    }
+
+    public Set<Integer> getAccountIds() {
+       return accountMap.keySet();
     }
 }

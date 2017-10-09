@@ -1,8 +1,7 @@
-package org.academiadecodigo.javabank.domain;
+package org.academiadecodigo.javabank.model;
 
-import org.academiadecodigo.javabank.domain.account.Account;
-import org.academiadecodigo.javabank.domain.account.AccountType;
-import org.academiadecodigo.javabank.managers.AccountManager;
+import org.academiadecodigo.javabank.model.account.Account;
+import org.academiadecodigo.javabank.model.account.AccountType;
 
 import java.util.*;
 
@@ -10,8 +9,6 @@ public class Customer {
 
     private int id;
     private String name;
-
-    private AccountManager accountManager;
     private Map<Integer, Account> accounts = new HashMap<>();
 
     public Customer(int id, String name) {
@@ -19,15 +16,10 @@ public class Customer {
         this.name = name;
     }
 
-    public void setAccountManager(AccountManager accountManager) {
-        this.accountManager = accountManager;
+    public void addAccount(Account account){
+        accounts.put(account.getId(), account);
     }
 
-    public int openAccount(AccountType accountType) {
-        Account account = accountManager.openAccount(accountType);
-        accounts.put(account.getId(), account);
-        return account.getId();
-    }
 
     public double getBalance(int id) {
         return accounts.get(id).getBalance();
@@ -58,6 +50,13 @@ public class Customer {
     public String getName() {
         return name;
     }
+
+    public Account getAccount(int id){
+
+        return accounts.get(id);
+
+    }
+
 
 }
 

@@ -1,12 +1,17 @@
 package org.academiadecodigo.javabank.application;
 
+
+import org.academiadecodigo.javabank.utils.Messages;
+
+
 public enum  UserOptions {
 
     GET_BALANCE(1, Messages.MENU_GET_BALANCE),
     DEPOSIT(2, Messages.MENU_DEPOSIT),
     WITHDRAW(3, Messages.MENU_WITHDRAW),
     OPEN_ACCOUNT(4, Messages.MENU_OPEN_ACCOUNT),
-    QUIT(5, Messages.MENU_QUIT);
+    TRANSFER(5, Messages.MENU_TRANSFER),
+    QUIT(6, Messages.MENU_QUIT);
 
     private int option;
     private String message;

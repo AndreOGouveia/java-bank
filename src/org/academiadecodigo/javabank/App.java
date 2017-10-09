@@ -1,9 +1,12 @@
 package org.academiadecodigo.javabank;
 
-import org.academiadecodigo.javabank.application.BankApplication;
-import org.academiadecodigo.javabank.domain.Bank;
-import org.academiadecodigo.javabank.domain.Customer;
-import org.academiadecodigo.javabank.managers.AccountManager;
+
+import org.academiadecodigo.bootcamp.Prompt;
+import org.academiadecodigo.javabank.application.UglyDuckling;
+import org.academiadecodigo.javabank.model.AccountManager;
+import org.academiadecodigo.javabank.model.Bank;
+import org.academiadecodigo.javabank.model.Customer;
+
 
 public class App {
 
@@ -19,8 +22,11 @@ public class App {
         bank.addCustomer(c1);
         bank.addCustomer(c2);
         bank.addCustomer(c3);
+        Prompt prompt = new Prompt(System.in,System.out);
 
-        BankApplication bankApplication = new BankApplication(bank);
-        bankApplication.start();
+        UglyDuckling app = new UglyDuckling(bank,prompt);
+/*
+        BankApplication bankApplication = new BankApplication(bank,);
+        bankApplication.start();*/
     }
 }
