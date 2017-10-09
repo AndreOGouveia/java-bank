@@ -1,53 +1,44 @@
 package org.academiadecodigo.javabank.test;
 
 import org.academiadecodigo.javabank.domain.*;
-import org.academiadecodigo.javabank.domain.accounts.Account;
-import org.academiadecodigo.javabank.domain.accounts.AccountType;
-import org.academiadecodigo.javabank.domain.managers.AccountManager;
+import org.academiadecodigo.javabank.domain.account.SavingsAccount;
+import org.academiadecodigo.javabank.managers.AccountManager;
+import org.academiadecodigo.javabank.domain.account.AccountType;
 
 public class CustomerTest {
 
     public boolean test() {
 
-        AccountManager acman = new AccountManager();
-        Customer customer = new Customer(acman,1,"André");
+        AccountManager accountManager = new AccountManager();
+        Customer customer = new Customer(1, "Rui");
+        customer.setAccountManager(accountManager);
 
-        // customer should start with zero balance
-        if (customer.getBalance() != 0) {
+        // customer should not contain any accounts
+        if (customer.getAccountIds().size() != 0) {
             return false;
         }
 
+        // should be able to open accounts
+        int ac = customer.openAccount(AccountType.CHECKING);
+        int as = customer.openAccount(AccountType.SAVINGS);
 
-        int a1 = customer.createAccount(AccountType.CHECKING);
-        int a2 = customer.createAccount(AccountType.SAVINGS);
-
-        customer.deposit(a1,100);
-        customer.deposit(a2,120);
-
-
-        // customer should be able to see his total balance
-        if (customer.getBalance() != 220) {
+        if (customer.getAccountIds().size() != 2) {
             return false;
         }
 
-        // customer must keep a min balance on savings account
-        customer.transfer(a2, a1, 30);
-        if (acman.getBalance(a2)  != 120) {
+        // customer should be able to get the balance of each individual account
+        accountManager.deposit(ac, 100);
+        accountManager.deposit(as, SavingsAccount.MIN_BALANCE + 100);
+        if (customer.getBalance(ac) != 100 || customer.getBalance(as) != SavingsAccount.MIN_BALANCE + 100) {
             return false;
         }
 
-        // customer must be able to perform transfers between accounts
-        customer.transfer(a2, a1, 20);
-        if (acman.getBalance(a2) != 100 || acman.getBalance(a1) != 120) {
-            return false;
-        }
-
-        // customer can not withdraw from savings account
-        customer.withdraw(a2, 100);
-        if (acman.getBalance(a2) != 100) {
+        // customer should be able to get the combined balance of all its accounts
+        if (customer.getBalance() != 200 + SavingsAccount.MIN_BALANCE) {
             return false;
         }
 
         return true;
     }
+
 }

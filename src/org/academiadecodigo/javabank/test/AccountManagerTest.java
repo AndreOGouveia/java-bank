@@ -1,59 +1,49 @@
 package org.academiadecodigo.javabank.test;
 
-import org.academiadecodigo.javabank.domain.accounts.Account;
-import org.academiadecodigo.javabank.domain.accounts.AccountType;
-import org.academiadecodigo.javabank.domain.managers.AccountManager;
+import org.academiadecodigo.javabank.domain.account.Account;
+import org.academiadecodigo.javabank.domain.account.AccountType;
+import org.academiadecodigo.javabank.domain.account.SavingsAccount;
+import org.academiadecodigo.javabank.managers.AccountManager;
 
 public class AccountManagerTest {
-    
-    public boolean test(){
 
+    public boolean test() {
 
         AccountManager accountManager = new AccountManager();
+        Account ac = accountManager.openAccount(AccountType.CHECKING);
+        Account as = accountManager.openAccount(AccountType.SAVINGS);
 
-        Account a1 = accountManager.openAccount(AccountType.CHECKING);
-        Account a2 = accountManager.openAccount(AccountType.SAVINGS);
-
-
-
-        // accountManager should start with zero balance
-        if (accountManager.getBalance() != 0) {
+        // should be able to deposit
+        accountManager.deposit(ac.getId(), 10);
+        accountManager.deposit(as.getId(), SavingsAccount.MIN_BALANCE + 10);
+        if (ac.getBalance() != 10 || as.getBalance() != SavingsAccount.MIN_BALANCE + 10) {
             return false;
         }
 
-
-        accountManager.deposit(a1.getId(),100);
-        accountManager.deposit(a2.getId(),120);
-
-        //account manager should be able to deposit money in accounts
-        if(accountManager.getBalance() != 220){
+        // should be able to withdraw
+        accountManager.withdraw(ac.getId(), 1);
+        if (ac.getBalance() != 9) {
             return false;
         }
 
-
-
-
-        // accountManager must keep a min balance on savings account
-        accountManager.transfer(a2.getId(), a1.getId(), 30);
-        if (accountManager.getBalance(a2.getId()) != 120) {
+        // should be able to transfer if sufficient funds are available
+        accountManager.transfer(as.getId(), ac.getId(), 1);
+        if (ac.getBalance() != 10 || as.getBalance() != SavingsAccount.MIN_BALANCE + 9) {
             return false;
         }
 
-        // accountManager must be able to perform transfers between accounts
-        accountManager.transfer(a2.getId(), a1.getId(), 20);
-        if (accountManager.getBalance(a2.getId()) != 100 || accountManager.getBalance(a1.getId()) != 120) {
+        // should not be able to transfer if available funds are not sufficient in savings
+        accountManager.transfer(as.getId(), ac.getId(), 10);
+        if (ac.getBalance() != 10 || as.getBalance() != SavingsAccount.MIN_BALANCE + 9) {
             return false;
         }
 
-        // accountManager can not withdraw from savings account
-        accountManager.withdraw(2, 100);
-        if (accountManager.getBalance(a2.getId()) != 100) {
+        // should not be able to transfer if available funds are not sufficient in checking
+        accountManager.transfer(ac.getId(), as.getId(), 11);
+        if (ac.getBalance() != 10 || as.getBalance() != SavingsAccount.MIN_BALANCE + 9) {
             return false;
         }
-
-
 
         return true;
     }
-
 }

@@ -1,51 +1,33 @@
 package org.academiadecodigo.javabank.test;
 
 import org.academiadecodigo.javabank.domain.*;
-import org.academiadecodigo.javabank.domain.accounts.Account;
-import org.academiadecodigo.javabank.domain.accounts.CheckingAccount;
-import org.academiadecodigo.javabank.domain.accounts.SavingsAccount;
-import org.academiadecodigo.javabank.domain.managers.AccountManager;
+import org.academiadecodigo.javabank.managers.AccountManager;
+import org.academiadecodigo.javabank.domain.account.AccountType;
 
 public class BankTest {
 
     public boolean test() {
-/*
+
+        AccountManager accountManager = new AccountManager();
         Bank bank = new Bank();
+        bank.setAccountManager(accountManager);
 
-        // bank initial balance should be 0
-        if (bank.getBalance() != 0) {
-            return false;
-        }
-
-
-        AccountManager
-
-        AccountFactory a1 = new SavingsAccount(1);
-        AccountFactory a2 = new SavingsAccount(2);
-        AccountFactory a3 = new CheckingAccount(3);
-        AccountFactory a4 = new CheckingAccount(4);
-
-        a1.credit(10);
-        a2.credit(20);
-        a3.credit(30);
-        a4.credit(40);
-
-        Customer c1 = new Customer(0);
-        Customer c2 = new Customer(1);
-
-        c1.openAccount(a1);
-        c1.openAccount(a2);
-        c2.openAccount(a3);
-        c2.openAccount(a4);
-
+        Customer c1 = new Customer(1, "Rui");
+        Customer c2 = new Customer(2, "Sergio");
         bank.addCustomer(c1);
         bank.addCustomer(c2);
 
-        // bank balance should equal sum of all accounts
-        if (bank.getBalance() != 100) {
+        int a1 = c1.openAccount(AccountType.CHECKING);
+        int a2 = c2.openAccount(AccountType.CHECKING);
+
+        accountManager.deposit(a1, 100);
+        accountManager.deposit(a2, 100);
+
+        // bank balance should equal sum of all customers balance
+        if (bank.getBalance() != 200) {
             return false;
         }
-*/
+
         return true;
     }
 }

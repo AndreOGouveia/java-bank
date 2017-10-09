@@ -1,43 +1,45 @@
 package org.academiadecodigo.javabank.test;
 
-import org.academiadecodigo.javabank.domain.accounts.Account;
-import org.academiadecodigo.javabank.domain.accounts.CheckingAccount;
+import org.academiadecodigo.javabank.domain.account.Account;
+import org.academiadecodigo.javabank.domain.account.CheckingAccount;
+import org.academiadecodigo.javabank.domain.account.SavingsAccount;
 
 public class CheckingAccountTest {
 
-    public boolean test(){
-
+    public boolean test() {
 
         Account account = new CheckingAccount(1);
 
-        // checking account should start with zero money
+        // initial balance should be zero
         if (account.getBalance() != 0) {
             return false;
         }
 
-        // we should be able to deposit money in checking account
-        account.credit(80);
-        if (account.getBalance() != 80) {
+        // should not be possible to credit or debit negative values
+        account.credit(-1);
+        account.debit(-2);
+        if (account.getBalance() != 0) {
             return false;
         }
 
-        // we should be able to take money from checking account
-        account.debit(40);
-        if (account.getBalance() != 40) {
-            return  false;
-        }
-
-         // checking account should say it is a checking account
-        if(!account.getAccountType().equals("CheckingAccount")){
+        // should be possible to credit account with positive value
+        account.credit(10);
+        if (account.getBalance() != 10) {
             return false;
         }
 
-        // savings account should be an instance of CheckingAccount
-        if(!(account instanceof CheckingAccount)){
+        // should not be possible to debit account if no sufficient funds
+        account.debit(11);
+        if (account.getBalance() != 10) {
+            return false;
+        }
+
+        // should be possible to debit account if sufficient funds
+        account.debit(8);
+        if (account.getBalance() != 2) {
             return false;
         }
 
         return true;
     }
-
 }

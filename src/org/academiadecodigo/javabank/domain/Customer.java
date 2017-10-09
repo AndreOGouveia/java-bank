@@ -1,62 +1,64 @@
 package org.academiadecodigo.javabank.domain;
 
-import org.academiadecodigo.javabank.domain.accounts.Account;
-import org.academiadecodigo.javabank.domain.accounts.AccountType;
-import org.academiadecodigo.javabank.domain.managers.AccountManager;
+import org.academiadecodigo.javabank.domain.account.Account;
+import org.academiadecodigo.javabank.domain.account.AccountType;
+import org.academiadecodigo.javabank.managers.AccountManager;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Customer {
 
-    private Map<Integer, Account> accounts = new HashMap<>();
-    private int customerNumber;
+    private int id;
+    private String name;
+
     private AccountManager accountManager;
-    private String customerName;
+    private Map<Integer, Account> accounts = new HashMap<>();
 
-    public Customer(AccountManager accountManager, int customerNumber, String customerName) {
+    public Customer(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public void setAccountManager(AccountManager accountManager) {
         this.accountManager = accountManager;
-        this.customerNumber = customerNumber;
-        this.customerName = customerName;
     }
 
-    public int createAccount(AccountType accountType) {
-        Account newAccount = accountManager.openAccount(accountType);
-        accounts.put(newAccount.getId(),newAccount);
-
-       return newAccount.getId();
-
-    }
-
-    public double getBalance(){
-       double balance =0;
-       for(Account acc : accounts.values()){
-           balance+= acc.getBalance();
-       }
-       return balance;
+    public int openAccount(AccountType accountType) {
+        Account account = accountManager.openAccount(accountType);
+        accounts.put(account.getId(), account);
+        return account.getId();
     }
 
     public double getBalance(int id) {
-        return accountManager.getBalance(id);
+        return accounts.get(id).getBalance();
     }
 
-    public void deposit(int id, double amount) {
-        accountManager.deposit(id, amount);
+    public double getBalance() {
+
+        double balance = 0;
+        for (Account account : accounts.values()) {
+            balance += account.getBalance();
+        }
+
+        return balance;
     }
 
-    public void withdraw(int id, double amount) {
-        accountManager.withdraw(id,amount);
+    public Set<Account> getAccounts() {
+        return new HashSet<>(accounts.values());
     }
 
-    public void transfer(int srcId, int destId, double amount) {
-        accountManager.transfer(srcId, destId, amount);
+    public Set<Integer> getAccountIds() {
+        return accounts.keySet();
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public int getId() {
+        return id;
     }
 
-    public int getCustomerNumber(){
-        return customerNumber;
+    public String getName() {
+        return name;
     }
+
 }
+
+
