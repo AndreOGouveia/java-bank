@@ -1,5 +1,7 @@
 package org.academiadecodigo.javabank.application;
 
+import org.academiadecodigo.javabank.utils.Messages;
+
 public enum  UserOptions {
 
     GET_BALANCE(1, Messages.MENU_GET_BALANCE),

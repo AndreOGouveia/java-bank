@@ -1,11 +1,11 @@
 package org.academiadecodigo.javabank.application.operations;
 
-import org.academiadecodigo.javabank.application.BankApplication;
-import org.academiadecodigo.javabank.application.Messages;
-import org.academiadecodigo.javabank.domain.account.Account;
+import org.academiadecodigo.javabank.view.BalanceView;
+import org.academiadecodigo.javabank.view.BankApplication;
+import org.academiadecodigo.javabank.utils.Messages;
+import org.academiadecodigo.javabank.model.account.Account;
 
 import java.text.DecimalFormat;
-import java.util.List;
 import java.util.Set;
 
 public class BalanceOperation extends AbstractBankOperation {
@@ -13,12 +13,15 @@ public class BalanceOperation extends AbstractBankOperation {
     DecimalFormat df = new DecimalFormat("#.##");
 
 
-    public BalanceOperation(BankApplication bankApplication) {
+    public BalanceOperation(BankApplication bankApplication, BalanceView) {
         super(bankApplication);
     }
 
     @Override
     public void execute() {
+
+
+
 
         System.out.println("\n" + customer.getName() + Messages.BALANCE_MESSAGE + "\n");
 

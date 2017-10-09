@@ -1,8 +1,8 @@
 package org.academiadecodigo.javabank.application.operations;
 
-import org.academiadecodigo.javabank.application.BankApplication;
-import org.academiadecodigo.javabank.application.Messages;
-import org.academiadecodigo.javabank.domain.account.AccountType;
+import org.academiadecodigo.javabank.view.BankApplication;
+import org.academiadecodigo.javabank.utils.Messages;
+import org.academiadecodigo.javabank.model.account.AccountType;
 
 public class NewAccountOperation extends AbstractBankOperation {
 

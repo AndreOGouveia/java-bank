@@ -1,6 +1,6 @@
-package org.academiadecodigo.javabank.application;
+package org.academiadecodigo.javabank.utils;
 
-public class Messages {
+public class    Messages {
 
 
     public final static String MENU_WELCOME = "Welcome to Java Bank";
