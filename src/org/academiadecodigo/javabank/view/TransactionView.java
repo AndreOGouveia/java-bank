@@ -21,9 +21,11 @@ public class TransactionView extends AbstractView {
 
         if (!hasAccounts()) {
             System.out.println("\n" + Messages.ERROR_NO_ACCOUNT);
-            abstractTransactionController.goBack();
+            //abstractTransactionController.goBack();
+            return;
         }
 
+        System.out.println(Messages.OPEN_ACCOUNTS+buildAccountList());
         int accountNumber = scanAccount();
         double amount = scanAmount();
 

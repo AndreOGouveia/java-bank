@@ -25,10 +25,11 @@ public class MenuController extends AbstractController {
         this.menuView = menuView;
     }
 
-    public void chooseNextController(int controllerHashMapId){
+    public void chosenOption(int option){
 
-        setNextController(controllerHashMap.get(controllerHashMapId));
+        setNextController(controllerHashMap.get(option));
         nextController.init();
+        this.init();
     }
 
     public void setControllerHashMap(Map<Integer, Controller> controllerHashMap) {

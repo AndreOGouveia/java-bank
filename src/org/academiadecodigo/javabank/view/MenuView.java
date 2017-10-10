@@ -7,8 +7,6 @@ import org.academiadecodigo.javabank.controller.MenuController;
 import org.academiadecodigo.javabank.model.Bank;
 import org.academiadecodigo.javabank.utils.Messages;
 
-import java.util.HashMap;
-
 public class MenuView extends AbstractView {
 
     MenuController menuController;
@@ -27,7 +25,7 @@ public class MenuView extends AbstractView {
 
         int choice = prompt.getUserInput(mainMenu);
 
-        menuController.chooseNextController(choice);
+        menuController.chosenOption(choice);
     }
 
     public void setMenuController(MenuController menuController) {

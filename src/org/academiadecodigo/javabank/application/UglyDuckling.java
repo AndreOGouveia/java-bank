@@ -72,6 +72,7 @@ public class UglyDuckling {
         transferController.setNextController(menuController);
         transferController.setTransferView(transferView);
         transferView.setTransferController(transferController);
+        transferController.setAccountManager(bank.getAccountManager());
 
 
         Map<Integer,Controller> map = new HashMap<>();
