@@ -1,14 +1,15 @@
 package org.academiadecodigo.javabank.controller.transaction;
 
 import org.academiadecodigo.javabank.controller.AbstractController;
-import org.academiadecodigo.javabank.model.Bank;
+import org.academiadecodigo.javabank.services.AccountService;
 
 public abstract class AbstractAccountTransactionController extends AbstractController implements AccountTransactionController {
 
-    protected Bank bank;
+    protected AccountService accountService;
 
-    public void setBank(Bank bank) {
-        this.bank = bank;
+    public void setAccountService(AccountService accountService) {
+        this.accountService = accountService;
     }
+
 
 }

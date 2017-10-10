@@ -1,20 +1,18 @@
-package org.academiadecodigo.javabank.managers;
+package org.academiadecodigo.javabank.services;
 
+import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.model.account.AccountType;
 import org.academiadecodigo.javabank.factories.AccountFactory;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class AccountManager {
+public class AccountService {
 
     private AccountFactory accountFactory = new AccountFactory();
     private Map<Integer, Account> accountMap;
-
-    public AccountManager() {
+    public AccountService() {
         accountMap = new HashMap<>();
     }
 
@@ -52,5 +50,16 @@ public class AccountManager {
             srcAccount.debit(amount);
             dstAccount.credit(amount);
         }
+    }
+
+    public double getTotalAccountsBalance() {
+
+        double balance = 0;
+
+        for (Account account : accountMap.values()) {
+            balance += account.getBalance();
+        }
+
+        return balance;
     }
 }

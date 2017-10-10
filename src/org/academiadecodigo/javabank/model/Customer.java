@@ -21,8 +21,8 @@ public class Customer {
         accounts.put(account.getId(), account);
     }
 
-    public Set<Account> getAccounts() {
-        return new HashSet<>(accounts.values());
+    public Map<Integer, Account> getAccounts() {
+        return accounts;
     }
 
     public double getBalance(int id) {
@@ -50,6 +50,9 @@ public class Customer {
     public String getName() {
         return name;
     }
+
+
+
 }
 
 
