@@ -35,7 +35,7 @@ public class AccountTransactionView extends AbstractView {
 
         StringBuilder builder = new StringBuilder();
 
-        for (Integer id : transactionController.getCustomerService().getLoginCustomer().getAccountIds()) {
+        for (Integer id : transactionController.getLoginCustomer().getAccountIds()) {
             builder.append(id);
             builder.append(" ");
         }

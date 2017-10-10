@@ -4,7 +4,7 @@ import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.javabank.controller.transaction.DepositController;
 import org.academiadecodigo.javabank.controller.transaction.WithdrawalController;
 import org.academiadecodigo.javabank.services.AccountService;
-import org.academiadecodigo.javabank.services.CustomerAuthenticationService;
+import org.academiadecodigo.javabank.services.AuthenticationService;
 import org.academiadecodigo.javabank.services.CustomerService;
 import org.academiadecodigo.javabank.view.UserOptions;
 import org.academiadecodigo.javabank.controller.*;
@@ -20,7 +20,7 @@ public class Bootstrap {
 
     private CustomerService customerService = new CustomerService();
     private AccountService accountService = new AccountService();
-    private CustomerAuthenticationService customerAuthenticationService = new CustomerAuthenticationService();
+    private AuthenticationService authenticationService = new AuthenticationService();
 
 
     public void generateTestData() {
@@ -42,17 +42,18 @@ public class Bootstrap {
         // attach all input to standard i/o
         Prompt prompt = new Prompt(System.in, System.out);
 
-        customerAuthenticationService.setCustomerService(customerService);
+        authenticationService.setCustomerService(customerService);
+        customerService.setAuthenticationService(authenticationService);
 
         // wire login controller and view
         LoginController loginController = new LoginController();
         LoginView loginView = new LoginView();
         loginController.setView(loginView);
         loginController.setCustomerService(customerService);
-        loginController.setCustomerService(customerService);
         loginView.setLoginController(loginController);
         loginView.setPrompt(prompt);
-        loginController.setCustomerAuthenticationService(customerAuthenticationService);
+        loginController.setAuthenticationService(authenticationService);
+
 
         // wire main controller and view
         MainController mainController = new MainController();
@@ -68,6 +69,7 @@ public class Bootstrap {
         BalanceView balanceView = new BalanceView();
         balanceController.setView(balanceView);
         balanceController.setCustomerService(customerService);
+        balanceView.setBalanceController(balanceController);
 
         // wire new account controller and view
         NewAccountView newAccountView = new NewAccountView();

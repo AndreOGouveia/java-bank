@@ -1,18 +1,17 @@
 package org.academiadecodigo.javabank.controller;
 
-import org.academiadecodigo.javabank.services.CustomerAuthenticationService;
-import org.academiadecodigo.javabank.services.CustomerService;
+import org.academiadecodigo.javabank.services.AuthenticationService;
 
 public class LoginController extends AbstractController {
 
     private Controller nextController;
-    private CustomerAuthenticationService customerAuthenticationService;
+    private AuthenticationService authenticationService;
 
-    private CustomerService customerService;
+
 
     public void onLogin(int id) {
-        if(customerAuthenticationService.authenticate(id)) {
-            customerService.setLoginCustomer(id);
+        if(authenticationService.authenticate(id)) {
+            authenticationService.setLoginCustomer(id);
             nextController.init();
 
         } else{
@@ -25,11 +24,7 @@ public class LoginController extends AbstractController {
         this.nextController = nextController;
     }
 
-    public void setCustomerService(CustomerService customerService) {
-        this.customerService = customerService;
-    }
-
-    public void setCustomerAuthenticationService(CustomerAuthenticationService customerAuthenticationService) {
-        this.customerAuthenticationService = customerAuthenticationService;
+    public void setAuthenticationService(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
 }

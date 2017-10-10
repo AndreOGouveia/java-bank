@@ -9,8 +9,7 @@ import java.util.Set;
 public class CustomerService {
 
     private HashMap<Integer, Customer> customers;
-    private int loginCustomer;
-
+    private AuthenticationService authenticationService;
 
 
     public CustomerService() {
@@ -25,16 +24,21 @@ public class CustomerService {
         return customers.keySet();
     }
 
-
-    public Customer getLoginCustomer() {
-        return customers.get(loginCustomer);
+    public Customer getCustomer(int id){
+        return customers.get(id);
     }
 
-    public void setLoginCustomer(int id) {
-        this.loginCustomer = id;
+    public void setAuthenticationService(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
 
     public void addAccount(Account account){
-        customers.get(loginCustomer).getAccounts().put(account.getId(),account);
+        authenticationService.getLoginCustomer().getAccounts().put(account.getId(),account);
     }
+
+    public Customer getLoginCustomer(){
+        return authenticationService.getLoginCustomer();
+    }
+
+
 }

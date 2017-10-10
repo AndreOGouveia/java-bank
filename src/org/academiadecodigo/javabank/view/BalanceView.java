@@ -20,7 +20,7 @@ public class BalanceView implements View {
 
     private void showBalance() {
 
-        Customer customer = balanceController.getCustomerService().getLoginCustomer();
+        Customer customer = balanceController.getLoginCustomer();
         System.out.println("\n" + customer.getName() + Messages.VIEW_BALANCE_MESSAGE + "\n");
 
         Collection<Account> accounts = customer.getAccounts().values();
@@ -29,5 +29,9 @@ public class BalanceView implements View {
         }
 
         System.out.println("\n\n" + Messages.VIEW_BALANCE_TOTAL_MESSAGE + df.format(customer.getBalance()));
+    }
+
+    public void setBalanceController(BalanceController balanceController) {
+        this.balanceController = balanceController;
     }
 }
