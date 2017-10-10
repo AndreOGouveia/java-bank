@@ -5,11 +5,7 @@ import org.academiadecodigo.javabank.services.AccountService;
 
 public abstract class AbstractAccountTransactionController extends AbstractController implements AccountTransactionController {
 
-    protected AccountService accountService;
 
-    public void setAccountService(AccountService accountService) {
-        this.accountService = accountService;
-    }
 
 
 }

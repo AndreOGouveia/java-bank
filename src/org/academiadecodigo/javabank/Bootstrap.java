@@ -49,7 +49,7 @@ public class Bootstrap {
         LoginView loginView = new LoginView();
         loginController.setView(loginView);
         loginController.setCustomerService(customerService);
-        loginView.setCustomerService(customerService);
+        loginController.setCustomerService(customerService);
         loginView.setLoginController(loginController);
         loginView.setPrompt(prompt);
         loginController.setCustomerAuthenticationService(customerAuthenticationService);
@@ -57,7 +57,7 @@ public class Bootstrap {
         // wire main controller and view
         MainController mainController = new MainController();
         MainView mainView = new MainView();
-        mainView.setCustomerService(customerService);
+        mainController.setCustomerService(customerService);
         mainView.setPrompt(prompt);
         mainView.setMainController(mainController);
         mainController.setView(mainView);
@@ -67,7 +67,7 @@ public class Bootstrap {
         BalanceController balanceController = new BalanceController();
         BalanceView balanceView = new BalanceView();
         balanceController.setView(balanceView);
-        balanceView.setCustomerService(customerService);
+        balanceController.setCustomerService(customerService);
 
         // wire new account controller and view
         NewAccountView newAccountView = new NewAccountView();
@@ -86,10 +86,10 @@ public class Bootstrap {
         depositController.setView(depositView);
         withdrawalController.setAccountService(accountService);
         withdrawalController.setView(withdrawView);
-        depositView.setCustomerService(customerService);
+        depositController.setCustomerService(customerService);
         depositView.setPrompt(prompt);
         depositView.setTransactionController(depositController);
-        withdrawView.setCustomerService(customerService);
+        withdrawalController.setCustomerService(customerService);
         withdrawView.setPrompt(prompt);
         withdrawView.setTransactionController(withdrawalController);
 
