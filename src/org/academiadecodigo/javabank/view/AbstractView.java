@@ -1,17 +1,18 @@
 package org.academiadecodigo.javabank.view;
 
 import org.academiadecodigo.bootcamp.Prompt;
-import org.academiadecodigo.javabank.services.CustomerService;
+import org.academiadecodigo.javabank.model.Bank;
 
-public abstract class AbstractView implements View{
+public abstract class AbstractView implements View {
 
-    protected CustomerService customerService;
     protected Prompt prompt;
+    protected Bank bank;
 
-    public AbstractView(CustomerService customerService, Prompt prompt) {
-        this.customerService = customerService;
+    public void setPrompt(Prompt prompt) {
         this.prompt = prompt;
     }
 
-
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
 }

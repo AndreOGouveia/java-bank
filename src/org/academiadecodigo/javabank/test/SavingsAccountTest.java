@@ -1,9 +1,7 @@
 package org.academiadecodigo.javabank.test;
 
-
 import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.model.account.SavingsAccount;
-
 
 public class SavingsAccountTest {
 

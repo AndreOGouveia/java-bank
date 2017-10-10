@@ -9,6 +9,7 @@ public class Customer {
 
     private int id;
     private String name;
+
     private Map<Integer, Account> accounts = new HashMap<>();
 
     public Customer(int id, String name) {
@@ -16,10 +17,13 @@ public class Customer {
         this.name = name;
     }
 
-    public void addAccount(Account account){
+    public void addAccount(Account account) {
         accounts.put(account.getId(), account);
     }
 
+    public Set<Account> getAccounts() {
+        return new HashSet<>(accounts.values());
+    }
 
     public double getBalance(int id) {
         return accounts.get(id).getBalance();
@@ -35,10 +39,6 @@ public class Customer {
         return balance;
     }
 
-    public Set<Account> getAccounts() {
-        return new HashSet<>(accounts.values());
-    }
-
     public Set<Integer> getAccountIds() {
         return accounts.keySet();
     }
@@ -50,14 +50,6 @@ public class Customer {
     public String getName() {
         return name;
     }
-
-    public Account getAccount(int id){
-
-        return accounts.get(id);
-
-    }
-
-
 }
 
 

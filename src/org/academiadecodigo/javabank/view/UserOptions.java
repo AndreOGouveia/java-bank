@@ -1,8 +1,4 @@
-package org.academiadecodigo.javabank.application;
-
-
-import org.academiadecodigo.javabank.utils.Messages;
-
+package org.academiadecodigo.javabank.view;
 
 public enum  UserOptions {
 
@@ -10,8 +6,7 @@ public enum  UserOptions {
     DEPOSIT(2, Messages.MENU_DEPOSIT),
     WITHDRAW(3, Messages.MENU_WITHDRAW),
     OPEN_ACCOUNT(4, Messages.MENU_OPEN_ACCOUNT),
-    TRANSFER(5, Messages.MENU_TRANSFER),
-    QUIT(6, Messages.MENU_QUIT);
+    QUIT(5, Messages.MENU_QUIT);
 
     private int option;
     private String message;

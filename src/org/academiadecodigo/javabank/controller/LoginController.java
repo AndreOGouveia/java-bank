@@ -1,35 +1,23 @@
 package org.academiadecodigo.javabank.controller;
 
-import org.academiadecodigo.javabank.services.CustomerService;
-import org.academiadecodigo.javabank.view.LoginView;
-
-
+import org.academiadecodigo.javabank.model.Bank;
 
 public class LoginController extends AbstractController {
 
-    LoginView loginView;
+    private Controller nextController;
 
-    public LoginController(CustomerService customerService) {
-        super(customerService);
-    }
+    private Bank bank;
 
-    public void init(){
-        loginView.show();
+    public void onLogin(int id) {
+        bank.setLoginCustomer(id);
         nextController.init();
     }
 
-    public void chooseCustomer(int customerNumber){
-
-        customerService.setActiveCustomer(customerNumber);
-
+    public void setNextController(Controller nextController) {
+        this.nextController = nextController;
     }
 
-
-    public void setLoginView(LoginView loginView) {
-        this.loginView = loginView;
+    public void setBank(Bank bank) {
+        this.bank = bank;
     }
-
-
-
-
 }

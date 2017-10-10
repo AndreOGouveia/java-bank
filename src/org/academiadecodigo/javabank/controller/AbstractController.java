@@ -1,19 +1,17 @@
 package org.academiadecodigo.javabank.controller;
 
-import org.academiadecodigo.javabank.services.CustomerService;
+import org.academiadecodigo.javabank.view.View;
 
 public abstract class AbstractController implements Controller {
 
-    protected CustomerService customerService;
-    protected Controller nextController;
+    protected View view;
 
-
-    public AbstractController(CustomerService customerService) {
-        this.customerService = customerService;
+    public void setView(View view) {
+        this.view = view;
     }
 
-    public void setNextController(Controller nextController) {
-        this.nextController = nextController;
+    @Override
+    public void init() {
+        view.show();
     }
-
 }

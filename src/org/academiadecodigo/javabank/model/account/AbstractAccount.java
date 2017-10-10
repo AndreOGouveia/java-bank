@@ -38,4 +38,5 @@ public abstract class AbstractAccount implements Account {
     public boolean canCredit(double amount) {
         return amount > 0;
     }
+
 }
