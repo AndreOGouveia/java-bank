@@ -1,10 +1,10 @@
 package org.academiadecodigo.javabank.application;
 import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.javabank.controller.*;
-import org.academiadecodigo.javabank.model.AccountManager;
-import org.academiadecodigo.javabank.model.Bank;
+import org.academiadecodigo.javabank.controller.transactions.DepositController;
+import org.academiadecodigo.javabank.controller.transactions.WithdrawalController;
+import org.academiadecodigo.javabank.services.CustomerService;
 import org.academiadecodigo.javabank.view.*;
-import sun.nio.cs.ext.MacArabic;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,18 +14,18 @@ public class UglyDuckling {
 
 
 
-    public UglyDuckling(Bank bank, Prompt prompt){
+    public UglyDuckling(CustomerService customerService, Prompt prompt){
 
         // initialization of view and controller for menu
-        MenuView menuView = new MenuView(bank,prompt);
-        MenuController menuController = new MenuController(bank);
+        MenuView menuView = new MenuView(customerService,prompt);
+        MenuController menuController = new MenuController(customerService);
         menuView.setMenuController(menuController);
         menuController.setMenuView(menuView);
 
         // initialization of view and controller for Login
 
-        LoginController loginController = new LoginController(bank);
-        LoginView loginView = new LoginView(bank,prompt);
+        LoginController loginController = new LoginController(customerService);
+        LoginView loginView = new LoginView(customerService,prompt);
         loginController.setNextController(menuController);
         loginView.setLoginController(loginController);
         loginController.setLoginView(loginView);
@@ -33,8 +33,8 @@ public class UglyDuckling {
 
         // initialization of view and controller for balance
 
-        BalanceView balanceView = new BalanceView(bank,prompt);
-        BalanceController balanceController = new BalanceController(bank);
+        BalanceView balanceView = new BalanceView(customerService,prompt);
+        BalanceController balanceController = new BalanceController(customerService);
         balanceController.setBalanceView(balanceView);
         balanceController.setNextController(menuController);
         balanceView.setBalanceController(balanceController);
@@ -42,15 +42,15 @@ public class UglyDuckling {
 
         // initialization of view and controller for simple transaction credit
 
-        TransactionView depositView = new TransactionView(bank,prompt);
-        DepositController depositController = new DepositController(bank);
+        TransactionView depositView = new TransactionView(customerService,prompt);
+        DepositController depositController = new DepositController(customerService);
         depositController.setNextController(menuController);
         depositView.setAbstractTransactionController(depositController);
         depositController.setTransactionView(depositView);
 
         // initialization of view and controller for simple transaction debit
-        TransactionView withdrawalView = new TransactionView(bank,prompt);
-        WithdrawalController withdrawalController = new WithdrawalController(bank);
+        TransactionView withdrawalView = new TransactionView(customerService,prompt);
+        WithdrawalController withdrawalController = new WithdrawalController(customerService);
         withdrawalController.setNextController(menuController);
         withdrawalView.setAbstractTransactionController(withdrawalController);
         withdrawalController.setTransactionView(withdrawalView);
@@ -58,21 +58,21 @@ public class UglyDuckling {
 
         // initialization of view and controller for opening accounts
 
-        OpenAccountView openAccountView = new OpenAccountView(bank, prompt);
-        OpenAccountController openAccountController = new OpenAccountController(bank);
-        openAccountController.setAccountManager(bank.getAccountManager());
+        OpenAccountView openAccountView = new OpenAccountView(customerService, prompt);
+        OpenAccountController openAccountController = new OpenAccountController(customerService);
+        openAccountController.setAccountService(customerService.getAccountService());
         openAccountController.setOpenAccountView(openAccountView);
         openAccountController.setNextController(menuController);
         openAccountView.setOpenAccountController(openAccountController);
 
         // initialization of view and controller for transfer between accounts
 
-        TransferView transferView = new TransferView(bank,prompt);
-        TransferController transferController = new TransferController(bank);
+        TransferView transferView = new TransferView(customerService,prompt);
+        TransferController transferController = new TransferController(customerService);
         transferController.setNextController(menuController);
         transferController.setTransferView(transferView);
         transferView.setTransferController(transferController);
-        transferController.setAccountManager(bank.getAccountManager());
+        transferController.setAccountService(customerService.getAccountService());
 
 
         Map<Integer,Controller> map = new HashMap<>();

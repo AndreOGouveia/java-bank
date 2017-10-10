@@ -1,35 +1,34 @@
 package org.academiadecodigo.javabank.controller;
 
-import org.academiadecodigo.javabank.model.AccountManager;
-import org.academiadecodigo.javabank.model.Bank;
+import org.academiadecodigo.javabank.services.AccountService;
+import org.academiadecodigo.javabank.services.CustomerService;
 import org.academiadecodigo.javabank.view.TransferView;
-
-import java.math.BigDecimal;
 
 public class TransferController extends AbstractController {
 
     TransferView transferView;
-    AccountManager accountManager;
+    AccountService accountService;
 
-    public TransferController(Bank bank) {
-        super(bank);
+    public TransferController(CustomerService customerService) {
+        super(customerService);
     }
 
     @Override
     public void init() {
         transferView.show();
+        nextController.init();
     }
 
     public void doTransfer(int originAcc, int destinationAcc, Double amount){
-        accountManager.transfer(originAcc,destinationAcc,amount);
-        nextController.init();
+        accountService.transfer(originAcc,destinationAcc,amount);
+
     }
 
     public void setTransferView(TransferView transferView) {
         this.transferView = transferView;
     }
 
-    public void setAccountManager(AccountManager accountManager) {
-        this.accountManager = accountManager;
+    public void setAccountService(AccountService accountService) {
+        this.accountService = accountService;
     }
 }

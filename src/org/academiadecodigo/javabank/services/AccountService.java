@@ -1,4 +1,4 @@
-package org.academiadecodigo.javabank.model;
+package org.academiadecodigo.javabank.services;
 
 import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.model.account.AccountType;
@@ -6,12 +6,12 @@ import org.academiadecodigo.javabank.utils.factories.AccountFactory;
 
 import java.util.*;
 
-public class AccountManager {
+public class AccountService {
 
     private AccountFactory accountFactory = new AccountFactory();
     private Map<Integer, Account> accountMap;
 
-    public AccountManager() {
+    public AccountService() {
         accountMap = new HashMap<>();
     }
 

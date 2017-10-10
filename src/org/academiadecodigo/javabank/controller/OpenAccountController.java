@@ -1,17 +1,17 @@
 package org.academiadecodigo.javabank.controller;
 
-import org.academiadecodigo.javabank.model.AccountManager;
-import org.academiadecodigo.javabank.model.Bank;
+import org.academiadecodigo.javabank.services.AccountService;
+import org.academiadecodigo.javabank.services.CustomerService;
 import org.academiadecodigo.javabank.model.account.AccountType;
 import org.academiadecodigo.javabank.view.OpenAccountView;
 
 public class OpenAccountController extends AbstractController{
 
-    AccountManager accountManager;
+    AccountService accountService;
     OpenAccountView openAccountView;
 
-    public OpenAccountController(Bank bank) {
-        super(bank);
+    public OpenAccountController(CustomerService customerService) {
+        super(customerService);
     }
 
 
@@ -19,17 +19,18 @@ public class OpenAccountController extends AbstractController{
     @Override
     public void init() {
         openAccountView.show();
+        nextController.init();
     }
 
     public void openAccountType(int choice){
 
-        bank.getCustomer(bank.getActiveCustomer()).addAccount(accountManager.openAccount(AccountType.values()[choice-1]));
-        nextController.init();
+        customerService.getCustomer(customerService.getActiveCustomer()).addAccount(accountService.openAccount(AccountType.values()[choice-1]));
+
 
     }
 
-    public void setAccountManager(AccountManager accountManager) {
-        this.accountManager = accountManager;
+    public void setAccountService(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     public void setOpenAccountView(OpenAccountView openAccountView) {

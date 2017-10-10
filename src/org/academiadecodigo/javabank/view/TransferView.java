@@ -4,15 +4,15 @@ import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.bootcamp.scanners.integer.IntegerSetInputScanner;
 import org.academiadecodigo.bootcamp.scanners.precisiondouble.DoubleInputScanner;
 import org.academiadecodigo.javabank.controller.TransferController;
-import org.academiadecodigo.javabank.model.Bank;
+import org.academiadecodigo.javabank.services.CustomerService;
 import org.academiadecodigo.javabank.utils.Messages;
 
 public class TransferView extends AbstractView{
 
     TransferController transferController;
 
-    public TransferView(Bank bank, Prompt prompt) {
-        super(bank, prompt);
+    public TransferView(CustomerService customerService, Prompt prompt) {
+        super(customerService, prompt);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class TransferView extends AbstractView{
 
     protected int scanOriginAccount() {
 
-        IntegerSetInputScanner scanner = new IntegerSetInputScanner(bank.getCustomer(bank.getActiveCustomer()).getAccountIds());
+        IntegerSetInputScanner scanner = new IntegerSetInputScanner(customerService.getCustomer(customerService.getActiveCustomer()).getAccountIds());
         scanner.setMessage(Messages.CHOOSE_ACCOUNT_ORIGIN);
         scanner.setError(Messages.ERROR_INVALID_ACCOUNT);
 
@@ -37,7 +37,7 @@ public class TransferView extends AbstractView{
     }
     protected int scanDestinationAccount() {
 
-        IntegerSetInputScanner scanner = new IntegerSetInputScanner(bank.getAccountManager().getAccountIds());
+        IntegerSetInputScanner scanner = new IntegerSetInputScanner(customerService.getAccountService().getAccountIds());
         scanner.setMessage(Messages.CHOOSE_ACCOUNT_DESTINATION);
         scanner.setError(Messages.ERROR_INVALID_ACCOUNT);
 

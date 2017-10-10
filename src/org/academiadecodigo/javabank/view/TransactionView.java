@@ -3,8 +3,8 @@ package org.academiadecodigo.javabank.view;
 import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.bootcamp.scanners.integer.IntegerSetInputScanner;
 import org.academiadecodigo.bootcamp.scanners.precisiondouble.DoubleInputScanner;
-import org.academiadecodigo.javabank.controller.AbstractTransactionController;
-import org.academiadecodigo.javabank.model.Bank;
+import org.academiadecodigo.javabank.controller.transactions.AbstractTransactionController;
+import org.academiadecodigo.javabank.services.CustomerService;
 import org.academiadecodigo.javabank.utils.Messages;
 
 public class TransactionView extends AbstractView {
@@ -12,8 +12,8 @@ public class TransactionView extends AbstractView {
     protected AbstractTransactionController abstractTransactionController;
 
 
-    public TransactionView(Bank bank, Prompt prompt) {
-        super(bank, prompt);
+    public TransactionView(CustomerService customerService, Prompt prompt) {
+        super(customerService, prompt);
     }
 
     @Override
@@ -21,7 +21,6 @@ public class TransactionView extends AbstractView {
 
         if (!hasAccounts()) {
             System.out.println("\n" + Messages.ERROR_NO_ACCOUNT);
-            //abstractTransactionController.goBack();
             return;
         }
 
@@ -44,7 +43,7 @@ public class TransactionView extends AbstractView {
 
         StringBuilder builder = new StringBuilder();
 
-        for (Integer id : bank.getCustomer(bank.getActiveCustomer()).getAccountIds()) {
+        for (Integer id : customerService.getCustomer(customerService.getActiveCustomer()).getAccountIds()) {
             builder.append(id);
             builder.append(" ");
         }
@@ -53,12 +52,12 @@ public class TransactionView extends AbstractView {
     }
 
     protected boolean hasAccounts() {
-        return bank.getCustomer(bank.getActiveCustomer()).getAccountIds().size() > 0;
+        return customerService.getCustomer(customerService.getActiveCustomer()).getAccountIds().size() > 0;
     }
 
     protected int scanAccount() {
 
-        IntegerSetInputScanner scanner = new IntegerSetInputScanner(bank.getCustomer(bank.getActiveCustomer()).getAccountIds());
+        IntegerSetInputScanner scanner = new IntegerSetInputScanner(customerService.getCustomer(customerService.getActiveCustomer()).getAccountIds());
         scanner.setMessage(Messages.CHOOSE_ACCOUNT);
         scanner.setError(Messages.ERROR_INVALID_ACCOUNT);
 

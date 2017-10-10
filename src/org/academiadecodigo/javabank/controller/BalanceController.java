@@ -1,6 +1,6 @@
 package org.academiadecodigo.javabank.controller;
 
-import org.academiadecodigo.javabank.model.Bank;
+import org.academiadecodigo.javabank.services.CustomerService;
 import org.academiadecodigo.javabank.view.BalanceView;
 
 public class BalanceController extends AbstractController{
@@ -8,8 +8,8 @@ public class BalanceController extends AbstractController{
 
     BalanceView balanceView;
 
-    public BalanceController(Bank bank) {
-        super(bank);
+    public BalanceController(CustomerService customerService) {
+        super(customerService);
     }
 
     @Override

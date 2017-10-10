@@ -1,19 +1,13 @@
 package org.academiadecodigo.javabank.test;
 
 
-import org.academiadecodigo.javabank.model.*;
-import org.academiadecodigo.javabank.model.account.SavingsAccount;
-import org.academiadecodigo.javabank.model.AccountManager;
-import org.academiadecodigo.javabank.model.account.AccountType;
-
-
 public class CustomerTest {
 
     public boolean test() {
 /*
-        AccountManager accountManager = new AccountManager();
+        AccountService accountManager = new AccountService();
         Customer customer = new Customer(1, "Rui");
-        customer.setAccountManager(accountManager);
+        customer.setAccountService(accountManager);
 
         // customer should not contain any accounts
         if (customer.getAccountIds().size() != 0) {
