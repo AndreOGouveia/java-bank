@@ -1,6 +1,6 @@
 package org.academiadecodigo.model.account;
 
-public class SavingsAccount extends AbstractAccount {
+public class SavingsAccount extends Account {
 
     public static final double MIN_BALANCE = 100;
 
