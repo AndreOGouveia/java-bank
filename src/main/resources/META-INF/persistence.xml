@@ -17,7 +17,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
-            <property name="hibernate.hbm2ddl.import.sql" value="./src/main/resources/META-INF/testdata.sql"/>
+            <property name="hibernate.hbm2ddl.import_files" value="db/testdata.sql"/>
             <property name="hibernate.hbm2ddl.import_files_sql_extractor" value="org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor" />
 
         </properties>

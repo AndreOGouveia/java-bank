@@ -1,6 +1,6 @@
 package org.academiadecodigo.model;
 
-public interface Model {
+public interface lModel {
 
     Integer getId();
 

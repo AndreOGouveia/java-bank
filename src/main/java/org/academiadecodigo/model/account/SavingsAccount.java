@@ -1,5 +1,8 @@
 package org.academiadecodigo.model.account;
 
+import javax.persistence.Entity;
+
+@Entity
 public class SavingsAccount extends Account {
 
     public static final double MIN_BALANCE = 100;

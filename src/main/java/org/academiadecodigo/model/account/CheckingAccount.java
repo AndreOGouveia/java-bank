@@ -1,5 +1,9 @@
 package org.academiadecodigo.model.account;
 
+
+import javax.persistence.Entity;
+
+@Entity
 public class CheckingAccount extends Account {
 
 

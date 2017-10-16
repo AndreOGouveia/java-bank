@@ -10,7 +10,7 @@ import java.util.Date;
 public abstract class AbstractModel implements Model {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Version
