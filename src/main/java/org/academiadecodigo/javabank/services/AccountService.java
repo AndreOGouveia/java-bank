@@ -1,8 +1,12 @@
 package org.academiadecodigo.javabank.services;
 
+import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.account.Account;
+import org.academiadecodigo.javabank.persistence.TransactionException;
 
-public interface AccountService extends CRUDService<Account> {
+import java.util.Collections;
+
+public interface AccountService  {
 
     void deposit(Integer id, double amount);
 
@@ -10,4 +14,6 @@ public interface AccountService extends CRUDService<Account> {
 
     void transfer(Integer srcId, Integer dstId, double amount);
 
+
+    int addAccount(Account account);
 }
