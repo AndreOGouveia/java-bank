@@ -2,8 +2,8 @@ package org.academiadecodigo.javabank.services;
 
 import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.account.Account;
-import org.academiadecodigo.javabank.persistence.TransactionManager;
 import org.academiadecodigo.javabank.persistence.dao.CustomerDao;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -11,36 +11,24 @@ import java.util.Set;
 
 public class CustomerServiceImpl implements CustomerService {
 
-    private TransactionManager tx;
     private CustomerDao customerDao;
-
-    public void setTransactionManager(TransactionManager tx) {
-        this.tx = tx;
-    }
 
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
     }
 
+    @Transactional
     @Override
     public Customer findById(Integer id) {
 
-        try {
-
-            tx.beginRead();
             return customerDao.findById(id);
 
-        } finally {
-            tx.commit();
-        }
     }
 
+    @Transactional
     @Override
     public double getBalance(Integer id) {
 
-        try {
-
-            tx.beginRead();
 
             Customer customer = customerDao.findById(id);
 
@@ -57,17 +45,11 @@ public class CustomerServiceImpl implements CustomerService {
 
             return balance;
 
-        } finally {
-            tx.commit();
-        }
     }
 
+    @Transactional
     @Override
     public Set<Integer> getCustomerAccountIds(Integer id) {
-
-        try {
-
-            tx.beginRead();
 
             Customer customer = customerDao.findById(id);
 
@@ -83,9 +65,5 @@ public class CustomerServiceImpl implements CustomerService {
             }
 
             return accountIds;
-
-        } finally {
-            tx.commit();
-        }
     }
 }
