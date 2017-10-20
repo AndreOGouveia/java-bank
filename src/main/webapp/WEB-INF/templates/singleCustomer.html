@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>JavaBank</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+    <style>
+
+
+
+
+    </style>
+
+</head>
+<body>
+
+<div id="header">
+    <h1 th:text="${'Customer: ' + customer.getId()}">Customer </h1>
+
+</div>
+
+<div>
+
+    <div><strong>First name: </strong> <p th:text="${customer.getFirstName()}">Customer First Name</p> </div>
+    <div><strong>Last name: </strong> <p th:text="${customer.getLastName()}">Customer Last Name</p> </div>
+    <div><strong>Email: </strong> <p th:text="${customer.getEmail()}">Customer Email</p> </div>
+    <div><strong>Phone: </strong> <p th:text="${customer.getPhone()}">Customer Phone Number</p> </div>
+
+    <table id="accountTable" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr style="text-align: left;background-color: #cccccc"  >
+            <th>Id</th>
+            <th>Account Type</th>
+            <th>Balance</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="account : ${customer.getAccounts()}">
+            <td th:text="${account.id}"></td>
+            <td th:text="${account.getAccountType()}"></td>
+            <td th:text="${account.getBalance()}"></td>
+        </tr>
+        </tbody>
+
+    </table>
+    <div>
+        <button onclick="window.location.href='/ag/customers'">BACK</button>
+    </div>
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<script src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#accountTable').DataTable();
+    });
+</script>
+</body>
+</html>

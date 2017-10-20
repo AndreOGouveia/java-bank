@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>JavaBank</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+    <style>
+
+
+
+
+    </style>
+
+</head>
+<body>
+
+<div id="header">
+    <h1>Customer List</h1>
+
+</div>
+
+<div>
+
+    <table id="customerTable" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr style="text-align: left;background-color: #cccccc"  >
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Show</th>
+            <th>Delete</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.firstName}"></td>
+            <td th:text="${customer.lastName}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.phone}"></td>
+            <td><a th:href="@{'/customers/' + ${customer.id}}" href="/">View</a></td>
+            <td><a th:href="@{'/customers/delete/'+ ${customer.id}} " href="/">Delete</a></td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<script src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#customerTable').DataTable({
+            "order": true
+        });
+    });
+</script>
+</body>
+</html>

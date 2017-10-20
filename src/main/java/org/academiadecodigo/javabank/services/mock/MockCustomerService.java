@@ -39,4 +39,14 @@ public class MockCustomerService extends AbstractMockService<Customer> implement
 
         return accountIds;
     }
+
+    @Override
+    public List<Customer> getAllCustomers() {
+        return null;
+    }
+
+    @Override
+    public void deleteCustomer(int id) {
+
+    }
 }

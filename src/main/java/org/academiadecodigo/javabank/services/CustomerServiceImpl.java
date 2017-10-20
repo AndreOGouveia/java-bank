@@ -3,6 +3,7 @@ package org.academiadecodigo.javabank.services;
 import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.persistence.dao.CustomerDao;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -59,4 +60,16 @@ public class CustomerServiceImpl implements CustomerService {
         return accountIds;
 
     }
+
+    @Override
+    public List<Customer> getAllCustomers() {
+        return customerDao.findAll();
+    }
+
+    @Transactional
+    @Override
+    public void deleteCustomer(int id){
+        customerDao.delete(id);
+    }
+
 }
