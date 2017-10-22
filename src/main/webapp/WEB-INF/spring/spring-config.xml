@@ -8,11 +8,16 @@
     <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="locations" value="classpath:javabank.properties"/>
     </bean>
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+
+
     <import resource="persistence.xml"/>
     <import resource="services.xml"/>
 
     <!-- look for spring annotations inside the controller package -->
-    <mvc:annotation-driven/>
+
+
     <context:component-scan base-package="org.academiadecodigo.javabank.controller"/>
 
 

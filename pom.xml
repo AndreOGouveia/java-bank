@@ -99,11 +99,16 @@
                     <configuration>
                         <url>http://localhost:8080/manager/text</url>
                         <!-- server defined in ~/.m2/settings.xml -->
-                        <server>novabase</server>
+                        <server>home</server>
                         <path>/ag</path>
                     </configuration>
                 </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

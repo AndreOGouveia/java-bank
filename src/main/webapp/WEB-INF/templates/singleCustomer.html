@@ -1,60 +1,99 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>JavaBank</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
-    <link type="text/css" rel="stylesheet" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
-
-    <style>
-
-
-
-
-    </style>
-
-</head>
+<head th:replace="fragments/fragments :: head"></head>
 <body>
 
-<div id="header">
-    <h1 th:text="${'Customer: ' + customer.getId()}">Customer </h1>
+<div th:replace="fragments/fragments :: header">...</div>
+<div class="container">
+    <div class="row">
+        <div class="col centered">
+            <h3>Customer View</h3>
+            <hr>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col">
 
-</div>
+            <div><strong>First name: </strong> <p th:text="${customer.getFirstName()}">Customer First Name</p> </div>
+            <div><strong>Last name: </strong> <p th:text="${customer.getLastName()}">Customer Last Name</p> </div>
+            <div><strong>Email: </strong> <p th:text="${customer.getEmail()}">Customer Email</p> </div>
+            <div><strong>Phone: </strong> <p th:text="${customer.getPhone()}">Customer Phone Number</p> </div>
 
-<div>
+        </div>
 
-    <div><strong>First name: </strong> <p th:text="${customer.getFirstName()}">Customer First Name</p> </div>
-    <div><strong>Last name: </strong> <p th:text="${customer.getLastName()}">Customer Last Name</p> </div>
-    <div><strong>Email: </strong> <p th:text="${customer.getEmail()}">Customer Email</p> </div>
-    <div><strong>Phone: </strong> <p th:text="${customer.getPhone()}">Customer Phone Number</p> </div>
+        <div class="col">
 
-    <table id="accountTable" class="display" cellspacing="0" width="100%">
-        <thead>
-        <tr style="text-align: left;background-color: #cccccc"  >
-            <th>Id</th>
-            <th>Account Type</th>
-            <th>Balance</th>
+            <table id="accountTable" class="display" cellspacing="0">
+                <thead>
+                <tr class="tableHeader"  >
+                    <th>Id</th>
+                    <th>Account Type</th>
+                    <th>Balance</th>
+                    <th>Options</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="account : ${customer.getAccounts()}">
+                    <td th:text="${account.id}"></td>
+                    <td th:text="${account.getAccountType()}"></td>
+                    <td th:text="${account.getBalance()}"></td>
+                    <td><a th:href="@{'/account/main/' + ${account.id}}" href="/"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></td>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="account : ${customer.getAccounts()}">
-            <td th:text="${account.id}"></td>
-            <td th:text="${account.getAccountType()}"></td>
-            <td th:text="${account.getBalance()}"></td>
-        </tr>
-        </tbody>
+                </tr>
+                </tbody>
 
-    </table>
+            </table>
+
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                Create New Account
+            </button>
+
+        </div>
+    </div>
     <div>
-        <button onclick="window.location.href='/ag/customers'">BACK</button>
+            <button class="btn btn-secondary" onclick="window.location.href='/ag/customers'">BACK</button>
     </div>
 
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Custumer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form  th:action="@{/accountadd}" method="post">
+                    <div class="form-group">
+                        <p>Select account type:</p>
+                      <!--  <div th:each="accType : ${T(org.academiadecodigo.javabank.model.account.AccountType.values()}">
+                            <input type="radio" name="accountTypeChoice" th:id="${{accType}}" th:value="${{accType}}" />
+                            <label th:for="${{accType}}"></label>
+                        </div> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="balance">Please insert the ammout</label>
+                        <input  class="form-control" id="balance" name="balance" type="text"/>
+                    </div>
+                    <button style="float:right" class="btn btn-secondary" type="submit">SAVE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 <script src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
@@ -63,4 +102,5 @@
     });
 </script>
 </body>
+<footer th:replace="fragments/fragments :: footer"></footer>
 </html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragments/fragments :: head"></head>
+<body>
+
+<div th:replace="fragments/fragments :: header">...</div>
+<div class="container">
+    <div class="row">
+        <div class="col centered">
+            <h3>Account Options</h3>
+            <hr>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    <div>
+        <p class="textRight"><strong>Account Number: </strong><span th:text="${account.id}"></span></p>
+        <p class="textRight"><strong>Account Type: </strong><span th:text="${accType}"></span></p>
+        <p class="textRight"><strong>Account Balance: </strong><span th:text="${account.balance}"></span></p>
+
+    </div>
+    <div class="row">
+
+        <div class="col card text-center">
+            <div class="card-body">
+                <h4 class="card-title">Withdraw</h4>
+                <form th:object="${account}" th:action="@{'/account/withdrawal/' + ${account.id}}" method="post">
+                    <div class="form-group">
+                        <input class="form-control" name="ammount"/>
+                    </div>
+                    <button class="btn btn-secondary" type="submit">Withdraw</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col card text-center">
+                <div class="card-body">
+                    <h4 class="card-title">Deposit</h4>
+                    <form th:object="${account}" th:action="@{'/account/deposit/' + ${account.id}}" method="post">
+                        <div class="form-group">
+                            <input class="form-control" name="ammount"/>
+                        </div>
+                        <button class="btn btn-secondary" type="submit">Deposit</button>
+
+                    </form>
+                </div>
+        </div>
+
+
+
+        <div class="col card text-center">
+            <div class="card-body">
+                <h4 class="card-title">Delete</h4>
+                <form th:object="${account}" th:action="@{'/account/delete/' + ${account.id}}" method="post">
+                    <button class="btn btn-secondary" type="submit">DELETE</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+    <br>
+    <div>
+        <a class="btn btn-secondary right" th:href="@{'/customers/' + ${customerNumber}}">Go Back</a>
+    </div>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+</body>
+<footer th:replace="fragments/fragments :: footer"></footer>
+</html>

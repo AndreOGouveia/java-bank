@@ -2,6 +2,7 @@ package org.academiadecodigo.javabank.persistence.dao.jpa;
 
 import org.academiadecodigo.javabank.model.Model;
 import org.academiadecodigo.javabank.persistence.dao.Dao;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -40,6 +41,7 @@ public abstract class GenericJpaDao<T extends Model> implements Dao<T> {
     public T findById(Integer id) {
         return em.find(modelType, id);
     }
+
 
     @Override
     public T saveOrUpdate(T modelObject) {

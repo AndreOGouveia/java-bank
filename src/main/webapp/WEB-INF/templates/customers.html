@@ -1,38 +1,31 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>JavaBank</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
-    <link type="text/css" rel="stylesheet" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+ <!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
 
-    <style>
-
-
-
-
-    </style>
-
-</head>
+<head th:replace="fragments/fragments :: head"></head>
 <body>
 
-<div id="header">
-    <h1>Customer List</h1>
+<div th:replace="fragments/fragments :: header">...</div>
 
-</div>
-
-<div>
+<div class="container">
+    <div class="row">
+            <div class="col centered">
+            <h3>Customer List</h3>
+            <hr>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
 
     <table id="customerTable" class="display" cellspacing="0" width="100%">
         <thead>
-        <tr style="text-align: left;background-color: #cccccc"  >
+        <tr class="tableHeader"  >
             <th>Id</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
             <th>Phone</th>
-            <th>Show</th>
-            <th>Delete</th>
+            <th>Options</th>
 
         </tr>
         </thead>
@@ -43,17 +36,58 @@
             <td th:text="${customer.lastName}"></td>
             <td th:text="${customer.email}"></td>
             <td th:text="${customer.phone}"></td>
-            <td><a th:href="@{'/customers/' + ${customer.id}}" href="/">View</a></td>
-            <td><a th:href="@{'/customers/delete/'+ ${customer.id}} " href="/">Delete</a></td>
+            <td><a style="margin-right:5px"  th:href="@{'/customers/' + ${customer.id}}" href="/"><i title="View" class="fa fa-eye" aria-hidden="true"></i></a><a style="margin-right:5px" th:href="@{'/customers/edit/' + ${customer.id}}" href="/"><i title="Edit" class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a style="margin-right:5px" th:href="@{'/customers/delete/'+ ${customer.id}} " href="/"><i title="Delete" class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+
         </tr>
         </tbody>
 
     </table>
+    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+        Create New Customer
+    </button>
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Custumer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:object="${newCustomer}" th:action="@{/customeradd}" method="post">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input  class="form-control" id="firstName" name="firstName" type="text" th:field="*{firstName}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input  class="form-control" id="lastName" name="lastNAme" type="text" th:field="*{lastName}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input  class="form-control"  id="email" name="email" type="text" th:field="*{email}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input  class="form-control" id="phone" name="phone" type="text" th:field="*{phone}"/>
+                    </div>
+                    <button style="float:right" class="btn btn-secondary" type="submit">SAVE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 <script src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
@@ -64,4 +98,5 @@
     });
 </script>
 </body>
+ <footer th:replace="fragments/fragments :: footer"></footer>
 </html>

@@ -62,13 +62,24 @@ public class AccountServiceImpl implements AccountService {
 
         // make sure transaction can be performed
         if (srcAccount.canDebit(amount) && dstAccount.canCredit(amount)) {
-            srcAccount.debit(amount);
+            srcAccount.debit(amount );
             dstAccount.credit(amount);
         }
 
         accountDao.saveOrUpdate(srcAccount);
         accountDao.saveOrUpdate(dstAccount);
 
+    }
+
+    @Override
+    public Account findById(Integer id) {
+        return accountDao.findById(id);
+    }
+
+    @Transactional
+    @Override
+    public void deleteAccount(Integer id) {
+        accountDao.delete(id);
     }
 }
 

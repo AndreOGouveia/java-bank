@@ -16,4 +16,8 @@ public interface CustomerService {
     List<Customer> getAllCustomers();
 
     void deleteCustomer(int id);
+
+    void addCustomer(Customer customer);
+
+    void editCustomer(Customer customer);
 }

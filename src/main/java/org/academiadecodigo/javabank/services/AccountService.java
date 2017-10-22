@@ -12,4 +12,7 @@ public interface AccountService {
 
     void transfer(Integer srcId, Integer dstId, double amount);
 
+    Account findById(Integer id);
+
+    void deleteAccount(Integer id);
 }

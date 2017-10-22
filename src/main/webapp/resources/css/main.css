@@ -1,0 +1,40 @@
+body{
+    background-color:#dddd;
+}
+.centered{
+    text-align:center;
+}
+.textRight{
+    text-align:right;
+}
+.right{
+    float:right;
+}
+.tableHeader{
+    text-align: left;
+    background-color: #868e96;
+    color: #fff;
+}
+
+.logo{
+    text-align: center;
+    margin-top:20px;
+    font-family: 'Great Vibes', cursive;
+}
+
+td > a > i {
+   color:#868e96;
+}
+td > a > i:hover {
+    color:#727b84;
+}
+
+footer{
+    border-top: 1px solid #868e96;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+      background-color: #dddd;
+      text-align:center;
+      padding:15px;
+}
