@@ -1,5 +1,6 @@
 package org.academiadecodigo.javabank.services;
 
+import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.persistence.dao.AccountDao;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,7 +80,16 @@ public class AccountServiceImpl implements AccountService {
     @Transactional
     @Override
     public void deleteAccount(Integer id) {
+        Account account = accountDao.findById(id);
+
+        Customer customer =  account.getCustomer();
+        if(customer != null){
+            customer.removeAccount(account);
+        }
+
         accountDao.delete(id);
+
+
     }
 }
 

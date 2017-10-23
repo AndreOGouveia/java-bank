@@ -3,7 +3,12 @@
 <head th:replace="fragments/fragments :: head"></head>
 <body>
 
+<div th:replace="fragments/fragments :: alert">...</div>
+
 <div th:replace="fragments/fragments :: header">...</div>
+
+
+
 <div class="container">
     <div class="row">
         <div class="col centered">
@@ -74,16 +79,16 @@
                 <form  th:action="@{/accountadd}" method="post">
                     <div class="form-group">
                         <p>Select account type:</p>
-                      <!--  <div th:each="accType : ${T(org.academiadecodigo.javabank.model.account.AccountType.values()}">
-                            <input type="radio" name="accountTypeChoice" th:id="${{accType}}" th:value="${{accType}}" />
-                            <label th:for="${{accType}}"></label>
-                        </div> -->
+                      <div th:each="accType : ${T(org.academiadecodigo.javabank.model.account.AccountType).values()}">
+                            <input type="radio" name="accountTypeChoice" th:id="${accType}" th:value="${accType}" />
+                            <label th:text="${accType}" th:for="${accType}"></label>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="balance">Please insert the ammout</label>
                         <input  class="form-control" id="balance" name="balance" type="text"/>
                     </div>
-                    <button style="float:right" class="btn btn-secondary" type="submit">SAVE</button>
+                    <button class="btn btn-secondary right" type="submit">SAVE</button>
                 </form>
             </div>
         </div>

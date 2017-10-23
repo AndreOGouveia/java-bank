@@ -16,17 +16,64 @@
         <div class="col"></div>
     </div>
 
-<form th:object="${customer}" th:action="@{/customeredit}" method="post">
+<form th:object="${formCustomer}" th:action="@{/customeredit}" method="post">
 
     <table style="padding:10px">
 
-        <tr><td><strong>Customer Id</strong></td><td><input class="form-control" id="id" name="id" type="text" th:field="*{id}"/></td><td></td></tr>
-        <tr><td><strong>First Name</strong></td><td><input class="form-control"id="firstName" name="firstName" type="text" th:field="*{firstName}"/></td></tr>
-        <tr><td><strong>Last Name</strong></td><td> <input class="form-control" id="lastName" name="lastNAme" type="text" th:field="*{lastName}"/></td></tr>
-        <tr><td><strong>Email</strong></td><td><input class="form-control" id="email" name="email" type="text" th:field="*{email}"/></td></tr>
-        <tr><td><strong>Phone</strong></td><td><input class="form-control" id="phone" name="phone" type="text" th:field="*{phone}"/></td></tr>
+        <input hidden="true" class="form-control" id="id" name="id" type="text" th:field="*{id}"/>
+
+        <tr>
+            <td>
+                <strong>First Name</strong>
+            </td>
+            <td>
+                <input class="form-control"id="firstName" name="firstName" type="text" th:field="*{firstName}"/>
+            </td >
+            <td>
+                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name field error messages</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <strong>Last Name</strong>
+            </td>
+            <td>
+                <input class="form-control" id="lastName" name="lastNAme" type="text" th:field="*{lastName}"/>
+            </td>
+            <td>
+                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name field error messages</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Email</strong>
+            </td>
+            <td>
+                <input class="form-control" id="email" name="email" type="text" th:field="*{email}"/>
+            </td>
+            <td>
+                <span class="help-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email field error messages</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <strong>Phone</strong>
+            </td>
+            <td>
+                <input class="form-control" id="phone" name="phone" type="text" th:field="*{phone}"/>
+
+            </td>
+            <td>
+                <span class="danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone field error messages</span>
+            </td>
+
+
+        </tr>
 
     </table>
+
 <div>
     <button class="btn btn-secondary" type="submit">SAVE</button> <button class="btn btn-secondary" type="button"  onclick="window.location.href='/ag/customers'">BACK</button>
 </div>

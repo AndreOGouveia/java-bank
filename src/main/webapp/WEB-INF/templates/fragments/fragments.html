@@ -11,6 +11,9 @@
 </head>
 <body>
 
+<div th:fragment="alert" th:if="${alert != null}" >
+    <p class="alert alert-success" th:text="${alert}"></p>
+</div>
 
 
 <div th:fragment="header" class="top-bar row">

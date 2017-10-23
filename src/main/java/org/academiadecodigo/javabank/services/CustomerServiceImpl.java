@@ -81,12 +81,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     @Override
     public void editCustomer(Customer customer) {
-        Customer toSave = customerDao.findById(customer.getId());
-        toSave.setFirstName(customer.getFirstName());
-        toSave.setLastName(customer.getLastName());
-        toSave.setEmail(customer.getEmail());
-        toSave.setPhone(customer.getPhone());
-        customerDao.saveOrUpdate(toSave);
+        customerDao.saveOrUpdate(customer);
     }
+
+
 
 }
