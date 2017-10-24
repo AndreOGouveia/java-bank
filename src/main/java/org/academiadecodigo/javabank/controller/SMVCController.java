@@ -23,7 +23,7 @@ import java.util.List;
 
 @Controller
 public class SMVCController {
-
+/*
         @Autowired
         private CustomerService customerService;
         @Autowired
@@ -148,7 +148,7 @@ public class SMVCController {
 
 
 
-
+*/
 
 
 }
